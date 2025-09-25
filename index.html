@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Site</title>
+<style>
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    position: relative;
+  }
+
+
+  #backgroundLayer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('background.png') no-repeat center center;
+    background-size: cover;
+    filter: blur(4px); 
+    z-index: -2;
+    transition: transform 0.2s ease;
+  }
+
+
+  #backgroundFollow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1;
+  }
+
+
+  .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeInScale 1s forwards;
+  }
+
+
+  @keyframes fadeInScale {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+
+  #logo {
+    width: 500px;
+    height: auto;
+  }
+
+
+  .code-text {
+    margin-top: 15px;
+    font-family: monospace;
+    font-size: 1.4em;
+  }
+
+  
+  .button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 28px;
+    background-color: #5865f2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+
+  .button:hover {
+    background-color: #67b0ffff;
+  }
+</style>
+</head>
+<body>
+
+
+<div id="backgroundLayer"></div>
+
+<div id="backgroundFollow"></div>
+
+
+<div class="container" id="mainContent">
+  <img src="logo.png" id="logo" alt="Logo" />
+  <div class="code-text">Minecraft PVPClient and GhostClient</div>
+  <a href="https://discord.com/invite/yourlink" class="button" target="_blank">Discord Server</a>
+</div>
+
+<script>
+
+  const bgLayer = document.getElementById('backgroundLayer');
+
+  document.addEventListener('mousemove', (e) => {
+    const { innerWidth, innerHeight } = window;
+    const offsetX = (e.clientX / innerWidth - 0.5) * 40; // -20 to +20
+    const offsetY = (e.clientY / innerHeight - 0.5) * 40; // -20 to +20
+
+    bgLayer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+  });
+</script>
+
+</body>
+</html>
